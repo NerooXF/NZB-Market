@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bisnis Tunggal - Profil Perusahaan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #121212;
+            --secondary-dark: #1e1e1e;
+            --accent-color: #ff6b00;
+            --text-light: #f5f5f5;
+            --text-gray: #b0b0b0;
+            --glow-effect: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--glow-effect);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #ff9a3d, #ff6b00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .profile-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: var(--glow-effect), 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover img {
+            transform: translateY(-5px);
+        }
+
+        .profile-details {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .profile-details h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ff9a3d, #ff6b00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .profile-details p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .business-type {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .type-tag {
+            background: rgba(255, 107, 0, 0.15);
+            color: #ff9a3d;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 500;
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .type-tag:hover {
+            background: rgba(255, 107, 0, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.2);
+        }
+
+        /* Products Section */
+        .products-section {
+            max-width: 1400px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--glow-effect), 0 5px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 107, 0, 0.2);
+            border-color: rgba(255, 107, 0, 0.3);
+        }
+
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .product-info p {
+            color: var(--text-gray);
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .product-price {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        /* Social Media Section */
+        .social-section {
+            max-width: 1200px;
+            margin: 6rem auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .social-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--glow-effect), 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .social-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 107, 0, 0.15);
+        }
+
+        .social-card:hover::before {
+            opacity: 1;
+            top: -20%;
+            left: -20%;
+        }
+
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-card:hover .social-icon {
+            transform: scale(1.2);
+        }
+
+        .social-card.whatsapp {
+            --color: #25D366;
+        }
+
+        .social-card.telegram {
+            --color: #0088cc;
+        }
+
+        .social-card.instagram {
+            --color: #E1306C;
+        }
+
+        .social-card.tiktok {
+            --color: #FF0050;
+        }
+
+        .social-card.facebook {
+            --color: #1877F2;
+        }
+
+        .social-card .social-icon {
+            color: var(--color);
+        }
+
+        .social-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .social-btn {
+            display: inline-block;
+            margin-top: 1.2rem;
+            padding: 0.7rem 1.8rem;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-light);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-card:hover .social-btn {
+            background: var(--color);
+            color: white;
+            box-shadow: 0 0 15px rgba(var(--color-rgb), 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.9);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .copyright {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.2rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+                margin-top: 2rem;
+            }
+
+            .business-type {
+                justify-content: center;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.8rem;
+            }
+
+            .social-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 0.8rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .profile-details h1 {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="#" class="logo">BisnisTunggal</a>
+            <div class="nav-links">
+                <a href="#">Beranda</a>
+                <a href="#">Profil</a>
+                <a href="#">Produk</a>
+                <a href="#">Layanan</a>
+                <a href="#">Kontak</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="profile-image">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Profil Bisnis">
+        </div>
+        <div class="profile-details">
+            <h1>Bisnis Tunggal Sukses</h1>
+            <p>Kami adalah perusahaan yang berdedikasi untuk menyediakan produk berkualitas tinggi dengan pelayanan terbaik. Dengan pengalaman lebih dari 10 tahun, kami telah melayani ribuan pelanggan dengan kepuasan yang maksimal.</p>
+            <div class="business-type">
+                <span class="type-tag">E-commerce</span>
+                <span class="type-tag">Retail</span>
+                <span class="type-tag">Produk Digital</span>
+                <span class="type-tag">Konsultasi</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <h2 class="section-title">Produk Unggulan Kami</h2>
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1399&q=80" alt="Produk 1">
+                </div>
+                <div class="product-info">
+                    <h3>Smart Watch Pro</h3>
+                    <p>Jam tangan pintar dengan fitur kesehatan lengkap dan desain elegan.</p>
+                    <div class="product-price">Rp 1.299.000</div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1364&q=80" alt="Produk 2">
+                </div>
+                <div class="product-info">
+                    <h3>Wireless Headphones</h3>
+                    <p>Headphone nirkabel dengan kualitas suara tinggi dan baterai tahan lama.</p>
+                    <div class="product-price">Rp 899.000</div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="Produk 3">
+                </div>
+                <div class="product-info">
+                    <h3>Smart Home Hub</h3>
+                    <p>Pusat kendali rumah pintar dengan kompatibilitas perangkat luas.</p>
+                    <div class="product-price">Rp 1.799.000</div>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1585155770447-2f66e2a397b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Produk 4">
+                </div>
+                <div class="product-info">
+                    <h3>Portable Speaker</h3>
+                    <p>Speaker portabel dengan suara jernih dan desain tahan air.</p>
+                    <div class="product-price">Rp 649.000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-section">
+        <h2 class="section-title">Media Sosial & Kontak Kami</h2>
+        <div class="social-grid">
+            <!-- WhatsApp -->
+            <div class="social-card whatsapp">
+                <div class="social-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3>Channel WhatsApp</h3>
+                <p>Hubungi kami via WhatsApp</p>
+                <a href="#" class="social-btn">Kunjungi</a>
+            </div>
+            
+            <!-- Telegram -->
+            <div class="social-card telegram">
+                <div class="social-icon">
+                    <i class="fab fa-telegram"></i>
+                </div>
+                <h3>Channel Telegram</h3>
+                <p>Bergabung di channel Telegram</p>
+                <a href="#" class="social-btn">Bergabung</a>
+            </div>
+            
+            <!-- Instagram -->
+            <div class="social-card instagram">
+                <div class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <h3>Instagram</h3>
+                <p>Ikuti kami di Instagram</p>
+                <a href="#" class="social-btn">Ikuti</a>
+            </div>
+            
+            <!-- TikTok -->
+            <div class="social-card tiktok">
+                <div class="social-icon">
+                    <i class="fab fa-tiktok"></i>
+                </div>
+                <h3>TikTok</h3>
+                <p>Video konten menarik</p>
+                <a href="#" class="social-btn">Tonton</a>
+            </div>
+            
+            <!-- Facebook -->
+            <div class="social-card facebook">
+                <div class="social-icon">
+                    <i class="fab fa-facebook"></i>
+                </div>
+                <h3>Facebook</h3>
+                <p>Like halaman Facebook kami</p>
+                <a href="#" class="social-btn">Like</a>
+            </div>
+            
+            <!-- Telegram 1 -->
+            <div class="social-card telegram">
+                <div class="social-icon">
+                    <i class="fab fa-telegram"></i>
+                </div>
+                <h3>Telegram 1</h3>
+                <p>Channel khusus promo</p>
+                <a href="#" class="social-btn">Gabung</a>
+            </div>
+            
+            <!-- Telegram 2 -->
+            <div class="social-card telegram">
+                <div class="social-icon">
+                    <i class="fab fa-telegram"></i>
+                </div>
+                <h3>Telegram 2</h3>
+                <p>Channel info produk baru</p>
+                <a href="#" class="social-btn">Gabung</a>
+            </div>
+            
+            <!-- Telegram 3 -->
+            <div class="social-card telegram">
+                <div class="social-icon">
+                    <i class="fab fa-telegram"></i>
+                </div>
+                <h3>Telegram 3</h3>
+                <p>Channel dukungan pelanggan</p>
+                <a href="#" class="social-btn">Gabung</a>
+            </div>
+            
+            <!-- WhatsApp 1 -->
+            <div class="social-card whatsapp">
+                <div class="social-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3>WhatsApp 1</h3>
+                <p>Layanan pelanggan utama</p>
+                <a href="#" class="social-btn">Chat</a>
+            </div>
+            
+            <!-- WhatsApp 2 -->
+            <div class="social-card whatsapp">
+                <div class="social-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3>WhatsApp 2</h3>
+                <p>Pemesanan produk</p>
+                <a href="#" class="social-btn">Chat</a>
+            </div>
+            
+            <!-- WhatsApp 3 -->
+            <div class="social-card whatsapp">
+                <div class="social-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3>WhatsApp 3</h3>
+                <p>Dukungan teknis</p>
+                <a href="#" class="social-btn">Chat</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="copyright">&copy; 2023 Bisnis Tunggal Sukses. Hak Cipta Dilindungi.</p>
+    </footer>
+</body>
+</html>
